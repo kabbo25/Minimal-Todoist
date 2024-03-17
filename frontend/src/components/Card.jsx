@@ -4,7 +4,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-export const Card = ({ title, desc, tag, id, completed, del, update }) => {
+export const Card = ({ title, desc, tag, priority, id, completed, del, update }) => {
   const [tododone, setTodoDone] = useState(completed);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -22,6 +22,12 @@ export const Card = ({ title, desc, tag, id, completed, del, update }) => {
     other: "blue",
   };
 
+  const priorityClass = {
+    Low: "low-priority text-success fw-bold fs-4",
+    Medium: "medium-priority text-warning fw-bold fs-4",
+    High: "high-priority text-danger fw-bold fs-4",
+  };
+
   const todocheck = () => {
     setTodoDone(!tododone);
   };
@@ -34,11 +40,12 @@ export const Card = ({ title, desc, tag, id, completed, del, update }) => {
   const onCheckboxChangeHandler = () => {
     todocheck();
     const updatedTodos = JSON.parse(localStorage.getItem("todos")).map(todo =>
-        todo.id === id ? { ...todo, completed: !tododone } : todo
+        todo.id === id ? { ...todo, completed: !tododone, tag: !tododone ? "Completed" : tag } : todo
     );
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
-    update({ _id: id, completed: !tododone });
+    update({ _id: id, completed: !tododone, tag: !tododone ? "Completed" : tag });
   };
+
 
   const deleteTodo = () => {
     const updatedTodos = JSON.parse(localStorage.getItem("todos")).filter(
@@ -66,7 +73,7 @@ export const Card = ({ title, desc, tag, id, completed, del, update }) => {
   };
 
   return (
-      <div className="todocard bg-secondary px-4 py-3">
+      <div className={`todocard bg-secondary px-4 py-3 ${priorityClass[priority]}`}>
         <Modal show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
           <Modal.Header closeButton>
             <Modal.Title>Confirm Action</Modal.Title>
@@ -167,7 +174,10 @@ export const Card = ({ title, desc, tag, id, completed, del, update }) => {
           </div>
           <div className="todo-footer d-flex align-items-center pt-4">
             <div className={`tag tag-${tagObject[tag]} rounded-circle`}></div>
-            <Form className="ms-auto">
+            <div className={`priority-badge ms-auto ${priorityClass[priority]}`}>
+              {priority}
+            </div>
+            <Form className="ms-3">
               <Form.Check
                   type="checkbox"
                   id="default-checkbox"

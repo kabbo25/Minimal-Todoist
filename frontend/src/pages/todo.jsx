@@ -22,7 +22,8 @@ export const Todo = () => {
     const [show, setShow] = useState(false);
     const [newTodoTitle, setNewTodoTitle] = useState("");
     const [newTodoDesc, setNewTodoDesc] = useState("");
-    const [defselectedTag, setdefSelectedTag] = useState("pending");
+    const [defSelectedTag, setDefSelectedTag] = useState("pending");
+    const [newTodoPriority, setNewTodoPriority] = useState("Low");
     const [selectedTag, setSelectedTag] = useState("");
     const [showEmpty, setShowEmpty] = useState(false);
     const [spinner, setSpinner] = useState(false);
@@ -47,7 +48,8 @@ export const Todo = () => {
         const newTodoWithId = {
             title: newTodoTitle,
             description: newTodoDesc,
-            tag: defselectedTag,
+            tag: defSelectedTag,
+            priority: newTodoPriority,
             _id: Date.now().toString(),
         };
 
@@ -71,16 +73,16 @@ export const Todo = () => {
         const updatedTodos = [...todos];
         updatedTodos[todoToUpdateIndex] = {
             ...updatedTodos[todoToUpdateIndex],
-            title:
-                data.title !== undefined
-                    ? data.title
-                    : updatedTodos[todoToUpdateIndex].title,
+            title: data.title !== undefined ? data.title : updatedTodos[todoToUpdateIndex].title,
             description:
                 data.description !== undefined
                     ? data.description
                     : updatedTodos[todoToUpdateIndex].description,
-            tag:
-                data.tag !== undefined ? data.tag : updatedTodos[todoToUpdateIndex].tag,
+            tag: data.tag !== undefined ? data.tag : updatedTodos[todoToUpdateIndex].tag,
+            priority:
+                data.priority !== undefined
+                    ? data.priority
+                    : updatedTodos[todoToUpdateIndex].priority,
             completed:
                 data.completed !== undefined
                     ? data.completed
@@ -92,30 +94,23 @@ export const Todo = () => {
 
     const handleTagClick = (e) => {
         setCurrentPage(1);
-        const clickedTag = e.currentTarget
-            .querySelector(".tagname")
-            .getAttribute("value");
+        const clickedTag = e.currentTarget.querySelector(".tagname").getAttribute("value");
         document.querySelectorAll(".tag-button").forEach((button) => {
             if (button !== e.currentTarget) {
                 button.classList.remove("active");
             }
         });
         e.currentTarget.classList.toggle("active");
-        setSelectedTag((prevSelectedTag) =>
-            prevSelectedTag === clickedTag ? "" : clickedTag
-        );
+        setSelectedTag((prevSelectedTag) => (prevSelectedTag === clickedTag ? "" : clickedTag));
     };
 
     const filterTodos =
-        selectedTag !== ""
-            ? todos.filter((todo) => todo.tag === selectedTag)
-            : todos;
+        selectedTag !== "" ? todos.filter((todo) => todo.tag === selectedTag) : todos;
 
     const lastTodoIndex = currentPage * 4;
     const firstTodoIndex = lastTodoIndex - 4;
     const currentTodos = filterTodos.slice(firstTodoIndex, lastTodoIndex);
-    const isLastPage =
-        lastTodoIndex >= filterTodos.length || filterTodos.length <= 4;
+    const isLastPage = lastTodoIndex >= filterTodos.length || filterTodos.length <= 4;
     const noTodos = filterTodos.length === 0;
 
     const paginateForward = () => {
@@ -137,10 +132,7 @@ export const Todo = () => {
                         <p className="fs-2 fw-bold text-primary">todo</p>
                     </Link>
 
-                    <i
-                        onClick={handleShow}
-                        className="fa fa-plus text-primary icon ms-auto pt-2 z-1"
-                    ></i>
+                    <i onClick={handleShow} className="fa fa-plus text-primary icon ms-auto pt-2 z-1"></i>
                 </div>
                 <div className="row pt-5 pt-md-0">
                     <div className="col-md-2 pt-md-7">
@@ -228,13 +220,25 @@ export const Todo = () => {
                                         <Form.Label>Tag</Form.Label>
                                         <Form.Control
                                             as="select"
-                                            onChange={(e) => setdefSelectedTag(e.target.value)}
+                                            onChange={(e) => setDefSelectedTag(e.target.value)}
                                             className="me-2"
                                         >
                                             <option value="pending">pending</option>
                                             <option value="Running">Running</option>
                                             <option value="Completed">Completed</option>
                                             <option value="other">Other</option>
+                                        </Form.Control>
+                                    </Form.Group>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Priority</Form.Label>
+                                        <Form.Control
+                                            as="select"
+                                            onChange={(e) => setNewTodoPriority(e.target.value)}
+                                            className="me-2"
+                                        >
+                                            <option value="Low">Low</option>
+                                            <option value="Medium">Medium</option>
+                                            <option value="High">High</option>
                                         </Form.Control>
                                     </Form.Group>
                                 </Form>
@@ -267,10 +271,7 @@ export const Todo = () => {
                                             currently on vacation. Must be nice! Feel free to bring it
                                             back to the hustle whenever you're ready.
                                         </p>
-                                        <button
-                                            onClick={handleShow}
-                                            className="btn btn-primary mt-4"
-                                        >
+                                        <button onClick={handleShow} className="btn btn-primary mt-4">
                                             Add todo
                                         </button>
                                     </div>
@@ -283,6 +284,7 @@ export const Todo = () => {
                                                         title={currentTodos[0].title}
                                                         desc={currentTodos[0].description}
                                                         tag={currentTodos[0].tag}
+                                                        priority={currentTodos[0].priority}
                                                         id={currentTodos[0]._id}
                                                         completed={currentTodos[0].completed}
                                                         key={currentTodos[0]._id}
@@ -299,6 +301,7 @@ export const Todo = () => {
                                                         title={currentTodos[1].title}
                                                         desc={currentTodos[1].description}
                                                         tag={currentTodos[1].tag}
+                                                        priority={currentTodos[1].priority}
                                                         id={currentTodos[1]._id}
                                                         completed={currentTodos[1].completed}
                                                         key={currentTodos[1]._id}
@@ -317,6 +320,7 @@ export const Todo = () => {
                                                         title={currentTodos[2].title}
                                                         desc={currentTodos[2].description}
                                                         tag={currentTodos[2].tag}
+                                                        priority={currentTodos[2].priority}
                                                         id={currentTodos[2]._id}
                                                         completed={currentTodos[2].completed}
                                                         key={currentTodos[2]._id}
@@ -333,6 +337,7 @@ export const Todo = () => {
                                                         title={currentTodos[3].title}
                                                         desc={currentTodos[3].description}
                                                         tag={currentTodos[3].tag}
+                                                        priority={currentTodos[3].priority}
                                                         id={currentTodos[3]._id}
                                                         completed={currentTodos[3].completed}
                                                         key={currentTodos[3]._id}
