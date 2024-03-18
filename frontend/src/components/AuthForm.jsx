@@ -44,6 +44,8 @@ export const AuthForm = ({
         const existingUser = localStorage.getItem("username");
         if (existingUser) {
           setFormError("User already exists");
+								navigate("/login");
+
         } else {
           localStorage.setItem("username", username);
           localStorage.setItem("password", password);
