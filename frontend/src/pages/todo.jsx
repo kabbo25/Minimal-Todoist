@@ -1,11 +1,9 @@
 import "../../node_modules/font-awesome/css/font-awesome.min.css";
-import axios from "axios";
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Card } from "../components/Card";
-import React from "react";
 import emptyImg from "../assets/images/DancingDoodle.png";
 import appImg from "../assets/images/MeditatingDoodle.png";
 import { Link } from "react-router-dom";
