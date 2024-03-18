@@ -15,7 +15,31 @@ import red from "../assets/images/red.png";
 import blue from "../assets/images/blue.png";
 import { useNavigate } from "react-router-dom";
 import SyncLoader from "react-spinners/SyncLoader";
+const SearchBar = ({ setSearchKeyword }) => {
+    const [searchTerm, setSearchTerm] = useState('');
+  
+    const handleChange = (event) => {
+      setSearchTerm(event.target.value);
+    };
+  
+    const handleSubmit = (event) => {
+      event.preventDefault();
+        setSearchKeyword(searchTerm);
+    };
+  
+    return (
+         <Form onSubmit={handleSubmit} className="d-flex">
+            <Form.Control
+                type="text"
+                placeholder="Search"
+                value={searchTerm}
+                onChange={handleChange}
+            />
+            <Button type="submit" variant="outline-success">Search</Button>
+        </Form>
 
+    );
+  };
 export const Todo = () => {
     const [todos, setTodos] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +51,18 @@ export const Todo = () => {
     const [selectedTag, setSelectedTag] = useState("");
     const [showEmpty, setShowEmpty] = useState(false);
     const [spinner, setSpinner] = useState(false);
+    const [searchKeyword, setSearchKeyword] = useState("");
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const storedTodos = JSON.parse(localStorage.getItem("todos"));
+        if(storedTodos){
+            const filteredTodos = storedTodos.filter((todo) => {
+                return todo.title.toLowerCase().includes(searchKeyword.toLowerCase()) || todo.description.toLowerCase().includes(searchKeyword.toLowerCase());
+            });
+            setTodos(filteredTodos);
+        }
+    }, [searchKeyword]);
 
     useEffect(() => {
         const storedTodos = JSON.parse(localStorage.getItem("todos"));
@@ -127,11 +162,11 @@ export const Todo = () => {
     return (
         <div>
             <div className="container">
-                <div className="nav-container mt-3 d-flex align-items-center">
+                <div className="nav-container mt-3 d-flex align-items-center justify-content-between">
                     <Link style={{ textDecoration: "none" }} to={"/"}>
-                        <p className="fs-2 fw-bold text-primary">todo</p>
+                        <p className="fs-2 fw-bold text-primary me-3">todo</p>
                     </Link>
-
+                <SearchBar setSearchKeyword={setSearchKeyword}/>
                     <i onClick={handleShow} className="fa fa-plus text-primary icon ms-auto pt-2 z-1"></i>
                 </div>
                 <div className="row pt-5 pt-md-0">
