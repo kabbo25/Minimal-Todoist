@@ -50,8 +50,10 @@ export const Todo = () => {
     const [showEmpty, setShowEmpty] = useState(false);
     const [spinner, setSpinner] = useState(false);
     const [searchKeyword, setSearchKeyword] = useState("");
-    const navigate = useNavigate();
-
+    
+    
+    const priorityMap = { Low: 1, Medium: 2, High: 3 };
+    
     useEffect(() => {
         const storedTodos = JSON.parse(localStorage.getItem("todos"));
         if(storedTodos){
@@ -63,19 +65,27 @@ export const Todo = () => {
     }, [searchKeyword]);
 
     useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            setShowEmpty(true);
+        }, 1000);
         const storedTodos = JSON.parse(localStorage.getItem("todos"));
         if (storedTodos) {
             setTodos(storedTodos);
         }
-    }, []);
-
-    useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            setShowEmpty(true);
-        }, 1);
-
         return () => clearTimeout(timeoutId);
     }, []);
+
+     const sortTodos = (order) => {
+        const sortedTodos = todos.sort((a, b) => {
+            if (order === "asc") {
+                return priorityMap[a.priority] - priorityMap[b.priority];
+            } else {
+                return priorityMap[b.priority] - priorityMap[a.priority];
+            }
+            
+        });
+       setTodos([...sortedTodos]);
+    };
 
     const addTodo = () => {
         const newTodoWithId = {
@@ -153,6 +163,7 @@ export const Todo = () => {
     const paginateBack = () => {
         setCurrentPage(currentPage - 1);
     };
+
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -390,7 +401,14 @@ export const Todo = () => {
                     <div className="col-md-1 d-none d-md-block pt-md-6 pt-lg-0 mt-md-n5">
                         <div className="row h-100 w-100">
                             <div className="col-12">
-                                <div className="d-flex flex-column justify-content-around h-100 align-items-end">
+                                <div className=" d-flex flex-column justify-content-around h-100 align-items-end">
+                                    <i
+                                        onClick={sortTodos}
+                                        // position="absolute" 
+                                        // className="position-absolute"
+                                        style={{top:'180px'}}
+                                        className={`position-absolute fa fa-arrow-up fa-arrow-down icon text-primary me-n4`}
+                                    ></i>
                                     <i
                                         onClick={paginateForward}
                                         className={`fa fa-arrow-right icon text-primary me-n4 ${
@@ -403,6 +421,7 @@ export const Todo = () => {
                                             currentPage === 1 ? `d-none` : ``
                                         }`}
                                     ></i>
+
                                 </div>
                             </div>
                         </div>
