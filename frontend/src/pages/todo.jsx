@@ -407,8 +407,8 @@ export const Todo = () => {
                                         // position="absolute" 
                                         // className="position-absolute"
                                         style={{top:'180px'}}
-                                        className={`position-absolute fa fa-arrow-up fa-arrow-down icon text-primary me-n4`}
-                                    ></i>
+                                        className={`position-absolute fa fa-arrow-up icon text-primary me-n4`}
+                                    >Sort</i>
                                     <i
                                         onClick={paginateForward}
                                         className={`fa fa-arrow-right icon text-primary me-n4 ${
