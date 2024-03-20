@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { Signup } from "./pages/signup";
 import { Login } from "./pages/login";
 import { Home } from "./pages/home";
-import { Todo } from "./pages/todo";
+import { Todo } from "./pages/Todo/todo";
 import { NoRoute } from "./pages/404";
 import "../node_modules/font-awesome/css/font-awesome.min.css";
 function App() {
