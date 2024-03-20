@@ -154,7 +154,15 @@
   height: 35px;
   width: 35px;
 }
-
+.bg-Completed {
+  background-color: var(--green);
+}
+.bg-Running {
+  background-color: var(--secondary);
+}
+.bg-pending {
+  background-color: var(--purple);
+}
 .tag-sm {
   height: 20px;
   width: 20px;
@@ -181,6 +189,14 @@
 .loader-bg {
   background-color: var(--secondary);
 }
+
+.sortbtn{
+  .tohide {
+    visibility: hidden;
+  }
+
+}
+
 @media screen and (max-width: 450px) and (min-width: 0px) {
   .hero {
     background-color: var(--secondary);
