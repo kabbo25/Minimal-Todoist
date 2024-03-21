@@ -217,21 +217,23 @@ export const Todo = () => {
                                     </div>
                                     <div>
 
-                                    <OverlayTrigger
-                                        delay={{hide: 450, show: 100}}
-                                        overlay={(props) => (
-                                            <Tooltip {...props}  >
-                                                Go To Forward Page
-                                            </Tooltip>
-                                        )}
-                                        placement="top"
-                                    > <i
+                                    {/*<OverlayTrigger*/}
+                                    {/*    delay={{hide: 450, show: 100}}*/}
+                                    {/*    overlay={(props) => (*/}
+                                    {/*        <Tooltip {...props}  >*/}
+                                    {/*            Go To Forward Page*/}
+                                    {/*        </Tooltip>*/}
+                                    {/*    )}*/}
+                                    {/*    placement="top"*/}
+                                    {/*>*/}
+                                    {/*    */}
+                                        <i
                                         onClick={paginateForward}
                                         className={`fa fa-arrow-right icon text-primary me-n4 ${
                                             isLastPage ? `d-none` : ``
                                         }`}
                                     ></i>
-                                    </OverlayTrigger>
+                                    {/*</OverlayTrigger>*/}
                                     </div>
                                     {/*<OverlayTrigger*/}
                                     {/*    delay={{hide: 450, show: 100}}*/}
