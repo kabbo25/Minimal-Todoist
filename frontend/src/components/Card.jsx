@@ -167,7 +167,6 @@ export const Card = ({ title, desc, tag, priority, id, completed, del, update })
                     >
                         {title}
                     </p>
-<<<<<<< HEAD
                    {/* <Stack direction='row' spacing={2}>
                         <ChakraButton size='md'
                                       height='40px'
@@ -190,7 +189,6 @@ export const Card = ({ title, desc, tag, priority, id, completed, del, update })
                             Delete
                         </ChakraButton>
                     </Stack>*/}
-=======
                     <Dropdown className="ms-auto" drop="start">
                         <Dropdown.Toggle id="dropdown-basic" variant="secondary">
                             <i className="fa fa-ellipsis-h icon light me-n2"></i>
@@ -205,7 +203,6 @@ export const Card = ({ title, desc, tag, priority, id, completed, del, update })
                             </Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
->>>>>>> 569646e (get back to previous state)
                 </div>
                 <div className="todo-desc pt-3">
                     <p
