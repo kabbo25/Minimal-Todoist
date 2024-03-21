@@ -198,6 +198,7 @@ export const Todo = () => {
                                         )}
                                         placement="top"
                                     ><Button onClick={sortTodos} variant="primary"
+                                             id='sortbtn'
                                              className=" sortbtn position-absolute mt-2 mt-md-0 " style={{
                                         left: '33px',
                                         border: '0',
@@ -217,23 +218,24 @@ export const Todo = () => {
                                     </div>
                                     <div>
 
-                                    {/*<OverlayTrigger*/}
-                                    {/*    delay={{hide: 450, show: 100}}*/}
-                                    {/*    overlay={(props) => (*/}
-                                    {/*        <Tooltip {...props}  >*/}
-                                    {/*            Go To Forward Page*/}
-                                    {/*        </Tooltip>*/}
-                                    {/*    )}*/}
-                                    {/*    placement="top"*/}
-                                    {/*>*/}
-                                    {/*    */}
+                                    <OverlayTrigger
+                                        delay={{hide: 450, show: 100}}
+                                        overlay={(props) => (
+                                            <Tooltip {...props}  >
+                                                Go To Forward Page
+                                            </Tooltip>
+                                        )}
+                                        placement="top"
+                                    >
+
                                         <i
+                                            id='forwardbtn'
                                         onClick={paginateForward}
                                         className={`fa fa-arrow-right icon text-primary me-n4 ${
                                             isLastPage ? `d-none` : ``
                                         }`}
                                     ></i>
-                                    {/*</OverlayTrigger>*/}
+                                    </OverlayTrigger>
                                     </div>
                                     {/*<OverlayTrigger*/}
                                     {/*    delay={{hide: 450, show: 100}}*/}
