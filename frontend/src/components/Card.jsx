@@ -1,5 +1,3 @@
-// Card.jsx
-
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
@@ -13,7 +11,9 @@ export const Card = ({ title, desc, tag, priority, id, completed, del, update })
     const [updatetodoTitle, setUpdateTodoTitle] = useState(title);
     const [updateTodoDesc, setUpdateTodoDesc] = useState(desc);
     const [updateSelectedTag, setUpdateSelectedTag] = useState(tag);
-    const [updateSelectedPriority, setUpdateSelectedPriority] = useState(priority);
+
+    const updateUrl = "updateTodo"; // Local storage key for update URL
+    const deleteUrl = "deleteTodo"; // Local storage key for delete URL
 
     const tagObject = {
         pending: "purple",
@@ -46,6 +46,7 @@ export const Card = ({ title, desc, tag, priority, id, completed, del, update })
         update({ _id: id, completed: !tododone, tag: !tododone ? "Completed" : tag });
     };
 
+
     const deleteTodo = () => {
         const updatedTodos = JSON.parse(localStorage.getItem("todos")).filter(
             todo => todo.id !== id
@@ -63,18 +64,11 @@ export const Card = ({ title, desc, tag, priority, id, completed, del, update })
                     title: updatetodoTitle,
                     description: updateTodoDesc,
                     tag: updateSelectedTag,
-                    priority: updateSelectedPriority,
                 }
                 : todo
         );
         localStorage.setItem("todos", JSON.stringify(updatedTodos));
-        update({
-            _id: id,
-            title: updatetodoTitle,
-            description: updateTodoDesc,
-            tag: updateSelectedTag,
-            priority: updateSelectedPriority,
-        });
+        update({ _id: id, title: updatetodoTitle, description: updateTodoDesc, tag: updateSelectedTag });
         handleCloseUpdateModal();
     };
 
@@ -134,19 +128,6 @@ export const Card = ({ title, desc, tag, priority, id, completed, del, update })
                                 <option value="other">Other</option>
                             </Form.Control>
                         </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Priority</Form.Label>
-                            <Form.Control
-                                as="select"
-                                value={updateSelectedPriority}
-                                onChange={(e) => setUpdateSelectedPriority(e.target.value)}
-                                className="me-2"
-                            >
-                                <option value="Low">Low</option>
-                                <option value="Medium">Medium</option>
-                                <option value="High">High</option>
-                            </Form.Control>
-                        </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
@@ -167,28 +148,6 @@ export const Card = ({ title, desc, tag, priority, id, completed, del, update })
                     >
                         {title}
                     </p>
-                   {/* <Stack direction='row' spacing={2}>
-                        <ChakraButton size='md'
-                                      height='40px'
-                                      width='60px'
-                                      border='0px'
-                                      onClick={handleShowUpdateModal} leftIcon={<EditIcon/>}
-                                      borderRadius='12px'
-                                      hover:bg='white' _hover='bg-white' _active='bg-white' _focus='bg-white'
-                                       variant='outline'>
-                            Edit
-                        </ChakraButton>
-                        <ChakraButton size='md'
-                                      height='40px'
-                                      width='80px'
-                                      border='0px'
-                                      borderRadius='12px'
-                                      onClick={handleShowDeleteModal} leftIcon={<DeleteIcon/>} colorScheme='red'
-                                      hover:bg='white' _hover='bg-white' _active='bg-white' _focus='bg-white'
-                                      variant='outline'>
-                            Delete
-                        </ChakraButton>
-                    </Stack>*/}
                     <Dropdown className="ms-auto" drop="start">
                         <Dropdown.Toggle id="dropdown-basic" variant="secondary">
                             <i className="fa fa-ellipsis-h icon light me-n2"></i>
@@ -231,3 +190,5 @@ export const Card = ({ title, desc, tag, priority, id, completed, del, update })
         </div>
     );
 };
+
+// adding previous card
