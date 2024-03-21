@@ -187,7 +187,6 @@ export const Todo = () => {
                             <div className="col-12">
                                 <div
                                     className=" position-relative d-flex flex-column justify-content-center h-100 align-items-end">
-                                    <div>
 
                                     <OverlayTrigger
                                         delay={{hide: 450, show: 100}}
@@ -215,11 +214,9 @@ export const Todo = () => {
                                     </Button>
 
                                     </OverlayTrigger>
-                                    </div>
-                                    <div>
 
                                     <OverlayTrigger
-                                        delay={{hide: 450, show: 100}}
+                                        delay={{hide: 100, show: 100}}
                                         overlay={(props) => (
                                             <Tooltip {...props}  >
                                                 Go To Forward Page
@@ -230,29 +227,29 @@ export const Todo = () => {
 
                                         <i
                                             id='forwardbtn'
-                                        onClick={paginateForward}
-                                        className={`fa fa-arrow-right icon text-primary me-n4 ${
-                                            isLastPage ? `d-none` : ``
-                                        }`}
-                                    ></i>
+                                            onClick={paginateForward}
+                                            className={`fa fa-arrow-right icon text-primary me-n4 ${
+                                                isLastPage ? `d-none` : ``
+                                            }`}
+                                        ></i>
                                     </OverlayTrigger>
-                                    </div>
-                                    {/*<OverlayTrigger*/}
-                                    {/*    delay={{hide: 450, show: 100}}*/}
-                                    {/*    overlay={(props) => (*/}
-                                    {/*        <Tooltip {...props}  >*/}
-                                    {/*            Go To Previous Page*/}
-                                    {/*        </Tooltip>*/}
-                                    {/*    )}*/}
-                                    {/*    placement="bottom"*/}
-                                    {/*>*/}
-                                    {/*    <i*/}
-                                    {/*        onClick={paginateBack}*/}
-                                    {/*        className={`fa fa-arrow-left icon text-primary me-n4 ${*/}
-                                    {/*            currentPage === 1 ? `d-none` : ``*/}
-                                    {/*        }`}*/}
-                                    {/*    ></i>*/}
-                                    {/*</OverlayTrigger>*/}
+                                    <OverlayTrigger
+                                        delay={{hide: 100, show: 100}}
+                                        overlay={(props) => (
+                                            <Tooltip {...props}  >
+                                                Go To Previous Page
+                                            </Tooltip>
+                                        )}
+                                        placement="bottom"
+                                    >
+                                        <i
+                                            id='backbtn'
+                                            onClick={paginateBack}
+                                            className={`fa fa-arrow-left icon text-primary me-n4 ${
+                                                currentPage === 1 ? `d-none` : ``
+                                            }`}
+                                        ></i>
+                                    </OverlayTrigger>
 
                                 </div>
                             </div>
