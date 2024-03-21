@@ -57,7 +57,7 @@ const NewTaskModal = ({show, setShow, addTodoState}) => {
                                             <option value="pending">pending</option>
                                             <option value="Running">Running</option>
                                             <option value="Completed">Completed</option>
-                                            <option value="other">Other</option>
+                                            <option value="other">other</option>
                                         </Form.Control>
                                     </Form.Group>
                                     <Form.Group className="mb-3">

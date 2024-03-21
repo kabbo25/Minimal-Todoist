@@ -1,4 +1,4 @@
-// import "../../node_modules/font-awesome/css/font-awesome.min.css";
+//import "../../node_modules/font-awesome/css/font-awesome.min.css";
 import {useEffect, useState} from "react";
 import {Card} from "../../components/Card";
 import emptyImg from "../../assets/images/DancingDoodle.png";
@@ -9,7 +9,7 @@ import NewTaskModal from "./NewTaskModal";
 import Button from "react-bootstrap/esm/Button";
 import "../../styles/style.css"
 import {OverlayTrigger, Tooltip} from "react-bootstrap";
-
+import dummyTodos from "./dummyData.jsx";
 export const Todo = () => {
     const [todos, setTodos] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -23,7 +23,7 @@ export const Todo = () => {
     const priorityMap = {Low: 1, Medium: 2, High: 3};
 
     useEffect(() => {
-        const storedTodos = JSON.parse(localStorage.getItem("todos"));
+            const storedTodos = JSON.parse(localStorage.getItem("todos")) ;
         if (storedTodos) {
             const filteredTodos = storedTodos.filter((todo) => {
                 return todo.title.toLowerCase().includes(searchKeyword.toLowerCase()) || todo.description.toLowerCase().includes(searchKeyword.toLowerCase());
@@ -36,7 +36,7 @@ export const Todo = () => {
         const timeoutId = setTimeout(() => {
             setShowEmpty(true);
         }, 1000);
-        const storedTodos = JSON.parse(localStorage.getItem("todos"));
+        const storedTodos = JSON.parse(localStorage.getItem("todos")) || dummyTodos;
         if (storedTodos) {
             setTodos(storedTodos);
         }

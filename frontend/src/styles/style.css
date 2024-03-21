@@ -163,6 +163,10 @@
 .bg-pending {
   background-color: var(--purple);
 }
+.bg-other{
+    background-color: var(--blue);
+
+}
 .tag-sm {
   height: 20px;
   width: 20px;

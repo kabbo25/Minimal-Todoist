@@ -8,7 +8,7 @@ import {Button as ChakraButton, Stack} from '@chakra-ui/react';
 // Use BootstrapButton and ChakraButton throughout your component
 import Modal from "react-bootstrap/Modal";
 import {DeleteIcon, EditIcon} from "@chakra-ui/icons";
-
+import { FlagFill } from 'react-bootstrap-icons';
 export const Card = ({title, desc, tag, priority, id, completed, del, update}) => {
     const [tododone, setTodoDone] = useState(completed);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -26,10 +26,11 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
     };
 
     const priorityClass = {
-        Low: "low-priority text-success fw-bold fs-4",
-        Medium: "medium-priority text-warning fw-bold fs-4",
-        High: "high-priority text-danger fw-bold fs-4",
+        Low: "low-priority  bi-flag text-success fw-bold fs-4",
+        Medium: "medium-priority bi-flag text-warning fw-bold fs-4",
+        High: "high-priority bi-flag text-danger fw-bold fs-4",
     };
+
 
     const todocheck = () => {
         setTodoDone(!tododone);
@@ -202,19 +203,21 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
                         {desc}
                     </p>
                 </div>
-                <div className="todo-footer d-flex align-items-center pt-4">
-                    <div className={`tag tag-${tagObject[tag]} rounded-circle`}></div>
-                    <div className={`priority-badge ms-auto ${priorityClass[priority]}`}>
-                        {priority}
+                <div className="todo-footer  pt-4">
+                    <div className="d-flex">
+                    <div className="ms-auto mt-2 text-danger">
+                        <FlagFill  size={25}/>
                     </div>
                     <Form className="ms-3">
                         <Form.Check
                             type="checkbox"
                             id="default-checkbox"
+                            border="1px solid black"
                             checked={tododone}
                             onChange={onCheckboxChangeHandler}
                         ></Form.Check>
                     </Form>
+                    </div>
                 </div>
             </div>
         </div>
