@@ -1,15 +1,12 @@
 // Card.jsx
 
+import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
-import {useState} from "react";
-import BootstrapButton from "react-bootstrap/Button";
-import {Button as ChakraButton, Stack} from '@chakra-ui/react';
-
-// Use BootstrapButton and ChakraButton throughout your component
+import { useState } from "react";
+import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import {DeleteIcon, EditIcon} from "@chakra-ui/icons";
 
-export const Card = ({title, desc, tag, priority, id, completed, del, update}) => {
+export const Card = ({ title, desc, tag, priority, id, completed, del, update }) => {
     const [tododone, setTodoDone] = useState(completed);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -43,10 +40,10 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
     const onCheckboxChangeHandler = () => {
         todocheck();
         const updatedTodos = JSON.parse(localStorage.getItem("todos")).map(todo =>
-            todo.id === id ? {...todo, completed: !tododone, tag: !tododone ? "Completed" : tag} : todo
+            todo.id === id ? { ...todo, completed: !tododone, tag: !tododone ? "Completed" : tag } : todo
         );
         localStorage.setItem("todos", JSON.stringify(updatedTodos));
-        update({_id: id, completed: !tododone, tag: !tododone ? "Completed" : tag});
+        update({ _id: id, completed: !tododone, tag: !tododone ? "Completed" : tag });
     };
 
     const deleteTodo = () => {
@@ -82,7 +79,7 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
     };
 
     return (
-        <div className={`todocard  px-4 py-3 ${priorityClass[priority]} bg-${tag}`}>
+        <div className={`todocard bg-secondary px-4 py-3 ${priorityClass[priority]}`}>
             <Modal show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Confirm Action</Modal.Title>
@@ -91,12 +88,12 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
                     Are you sure you want to delete this task?
                 </Modal.Body>
                 <Modal.Footer>
-                    <BootstrapButton variant="light" onClick={handleCloseDeleteModal}>
+                    <Button variant="light" onClick={handleCloseDeleteModal}>
                         Close
-                    </BootstrapButton>
-                    <BootstrapButton className="text-white" variant="danger" onClick={deleteTodo}>
+                    </Button>
+                    <Button className="text-white" variant="danger" onClick={deleteTodo}>
                         Delete
-                    </BootstrapButton>
+                    </Button>
                 </Modal.Footer>
             </Modal>
             <Modal show={showUpdateModal} onHide={handleCloseUpdateModal} centered>
@@ -153,16 +150,16 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <BootstrapButton variant="outline-dark" onClick={handleCloseUpdateModal}>
+                    <Button variant="outline-dark" onClick={handleCloseUpdateModal}>
                         Close
-                    </BootstrapButton>
-                    <BootstrapButton variant="success" onClick={updateTodoDetails}>
+                    </Button>
+                    <Button variant="success" onClick={updateTodoDetails}>
                         Update
-                    </BootstrapButton>
+                    </Button>
                 </Modal.Footer>
             </Modal>
             <div className="vstack">
-                <div className="todo-nav d-flex justify-content-between align-items-center">
+                <div className="todo-nav d-flex align-items-center">
                     <p
                         className={`fs-4 fw-bold text-primary overflow-hidden ${
                             tododone ? `checkedtodo` : ``
@@ -170,6 +167,7 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
                     >
                         {title}
                     </p>
+<<<<<<< HEAD
                    {/* <Stack direction='row' spacing={2}>
                         <ChakraButton size='md'
                                       height='40px'
@@ -192,6 +190,22 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
                             Delete
                         </ChakraButton>
                     </Stack>*/}
+=======
+                    <Dropdown className="ms-auto" drop="start">
+                        <Dropdown.Toggle id="dropdown-basic" variant="secondary">
+                            <i className="fa fa-ellipsis-h icon light me-n2"></i>
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick={handleShowUpdateModal} className="light">
+                                Edit...
+                                <Dropdown.Divider />
+                            </Dropdown.Item>
+                            <Dropdown.Item onClick={handleShowDeleteModal} className="light">
+                                Delete
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+>>>>>>> 569646e (get back to previous state)
                 </div>
                 <div className="todo-desc pt-3">
                     <p
