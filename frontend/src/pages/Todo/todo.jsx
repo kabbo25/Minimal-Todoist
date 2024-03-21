@@ -187,31 +187,31 @@ export const Todo = () => {
                             <div className="col-12">
                                 <div
                                     className=" position-relative d-flex flex-column justify-content-center h-100 align-items-end">
-                                    {/*<OverlayTrigger*/}
-                                    {/*    delay={{hide: 450, show: 100}}*/}
-                                    {/*    overlay={(props) => (*/}
-                                    {/*        <Tooltip {...props}  >*/}
-                                    {/*            Sort by priority*/}
-                                    {/*        </Tooltip>*/}
-                                    {/*    )}*/}
-                                    {/*    placement="top"*/}
-                                    {/*><Button onClick={sortTodos} variant="primary"*/}
-                                    {/*         className=" sortbtn position-absolute mt-2 mt-md-0 " style={{*/}
-                                    {/*    left: '33px',*/}
-                                    {/*    border: '0',*/}
-                                    {/*    color: 'gray',*/}
-                                    {/*    top: "22%",*/}
-                                    {/*    width: '120px',*/}
-                                    {/*    backgroundColor: "#ffffff",*/}
-                                    {/*    margin: '0',*/}
-                                    {/*    fontWeight: 'bold'*/}
-                                    {/*}}>*/}
-                                    {/*    <i className={`fa ${sortOrder === 'asc' ? 'fa-arrow-down' : 'fa-arrow-up'} icon pe-1`}/>*/}
-                                    {/*    /!* onhover text visible in span*!/*/}
-                                    {/*    <span className='tohide'>Sort</span>*/}
-                                    {/*</Button>*/}
+                                    <OverlayTrigger
+                                        delay={{hide: 450, show: 100}}
+                                        overlay={(props) => (
+                                            <Tooltip {...props}  >
+                                                Sort by priority
+                                            </Tooltip>
+                                        )}
+                                        placement="top"
+                                    ><Button onClick={sortTodos} variant="primary"
+                                             className=" sortbtn position-absolute mt-2 mt-md-0 " style={{
+                                        left: '33px',
+                                        border: '0',
+                                        color: 'gray',
+                                        top: "22%",
+                                        width: '120px',
+                                        backgroundColor: "#ffffff",
+                                        margin: '0',
+                                        fontWeight: 'bold'
+                                    }}>
+                                        <i className={`fa ${sortOrder === 'asc' ? 'fa-arrow-down' : 'fa-arrow-up'} icon pe-1`}/>
+                                        {/* onhover text visible in span*/}
+                                        <span className='tohide'>Sort</span>
+                                    </Button>
 
-                                    {/*</OverlayTrigger>*/}
+                                    </OverlayTrigger>
                                     {/*<OverlayTrigger*/}
                                     {/*    delay={{hide: 450, show: 100}}*/}
                                     {/*    overlay={(props) => (*/}
