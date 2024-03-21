@@ -192,22 +192,6 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
                             Delete
                         </ChakraButton>
                     </Stack>
-
-
-                    {/*<Dropdown className="ms-auto" drop="start">*/}
-                    {/*  <Dropdown.Toggle id="dropdown-basic" variant="secondary">*/}
-                    {/*    <i className="fa fa-ellipsis-h icon light me-n2"></i>*/}
-                    {/*  </Dropdown.Toggle>*/}
-                    {/*  <Dropdown.Menu>*/}
-                    {/*    <Dropdown.Item onClick={handleShowUpdateModal} className="light">*/}
-                    {/*      Edit...*/}
-                    {/*      <Dropdown.Divider />*/}
-                    {/*    </Dropdown.Item>*/}
-                    {/*    <Dropdown.Item onClick={handleShowDeleteModal} className="light">*/}
-                    {/*      Delete*/}
-                    {/*    </Dropdown.Item>*/}
-                    {/*  </Dropdown.Menu>*/}
-                    {/*</Dropdown>*/}
                 </div>
                 <div className="todo-desc pt-3">
                     <p
