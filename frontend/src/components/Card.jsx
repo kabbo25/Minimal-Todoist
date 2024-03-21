@@ -170,7 +170,7 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
                     >
                         {title}
                     </p>
-                    <Stack direction='row' spacing={2}>
+                   {/* <Stack direction='row' spacing={2}>
                         <ChakraButton size='md'
                                       height='40px'
                                       width='60px'
@@ -191,7 +191,7 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
                                       variant='outline'>
                             Delete
                         </ChakraButton>
-                    </Stack>
+                    </Stack>*/}
                 </div>
                 <div className="todo-desc pt-3">
                     <p
