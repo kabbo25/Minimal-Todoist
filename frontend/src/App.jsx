@@ -10,7 +10,7 @@ import "../node_modules/font-awesome/css/font-awesome.min.css";
 import { ChakraProvider } from '@chakra-ui/react'
 function App() {
   return (
-    <div>
+    <>
         <ChakraProvider>
       <Routes>
         <Route element={<Signup />} path="/signup"></Route>
@@ -19,7 +19,7 @@ function App() {
         <Route element={<NoRoute />} path="*"></Route>
       </Routes>
         </ChakraProvider>
-    </div>
+    </>
   );
 }
 
