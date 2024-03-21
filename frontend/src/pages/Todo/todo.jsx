@@ -187,6 +187,8 @@ export const Todo = () => {
                             <div className="col-12">
                                 <div
                                     className=" position-relative d-flex flex-column justify-content-center h-100 align-items-end">
+                                    <div>
+
                                     <OverlayTrigger
                                         delay={{hide: 450, show: 100}}
                                         overlay={(props) => (
@@ -212,6 +214,9 @@ export const Todo = () => {
                                     </Button>
 
                                     </OverlayTrigger>
+                                    </div>
+                                    <div>
+
                                     <OverlayTrigger
                                         delay={{hide: 450, show: 100}}
                                         overlay={(props) => (
@@ -227,6 +232,7 @@ export const Todo = () => {
                                         }`}
                                     ></i>
                                     </OverlayTrigger>
+                                    </div>
                                     {/*<OverlayTrigger*/}
                                     {/*    delay={{hide: 450, show: 100}}*/}
                                     {/*    overlay={(props) => (*/}
