@@ -11,7 +11,13 @@ import {ChakraProvider} from '@chakra-ui/react'
 function App() {
     return (
         <ChakraProvider>
-            <Todo/>
+            <>
+                <Routes>
+                    <Route element={<Signup/>} path="/signup"></Route>
+                    <Route element={<Login/>} path="/login"></Route>
+                    <Route element={<NoRoute/>} path="*"></Route>
+                </Routes>
+            </>
         </ChakraProvider>
     );
 }
