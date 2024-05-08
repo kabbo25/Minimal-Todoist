@@ -120,7 +120,7 @@
   --bs-dropdown-link-active-bg: rgba(0, 0, 0, 0.106);
 }
 
-.checkedtodo {
+.checkedTodo {
   text-decoration: line-through;
   text-decoration-thickness: 1px;
   text-decoration-color: inherit;
@@ -200,7 +200,6 @@
   }
 
 }
-
 @media screen and (max-width: 450px) and (min-width: 0px) {
   .hero {
     background-color: var(--secondary);

@@ -1,19 +1,20 @@
 // Card.jsx
 
-import Form from "react-bootstrap/Form";
+import {Button as ChakraButton, Stack} from '@chakra-ui/react';
 import {useState} from "react";
 import BootstrapButton from "react-bootstrap/Button";
-import {Button as ChakraButton, Stack} from '@chakra-ui/react';
+import Form from "react-bootstrap/Form";
 
+import {DeleteIcon, EditIcon} from "@chakra-ui/icons";
+import {FlagFill} from 'react-bootstrap-icons';
 // Use BootstrapButton and ChakraButton throughout your component
 import Modal from "react-bootstrap/Modal";
-import {DeleteIcon, EditIcon} from "@chakra-ui/icons";
-import { FlagFill } from 'react-bootstrap-icons';
+
 export const Card = ({title, desc, tag, priority, id, completed, del, update}) => {
-    const [tododone, setTodoDone] = useState(completed);
+    const [todoDone, setTodoDone] = useState(completed);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
-    const [updatetodoTitle, setUpdateTodoTitle] = useState(title);
+    const [updateTodoTitle, setUpdateTodoTitle] = useState(title);
     const [updateTodoDesc, setUpdateTodoDesc] = useState(desc);
     const [updateSelectedTag, setUpdateSelectedTag] = useState(tag);
     const [updateSelectedPriority, setUpdateSelectedPriority] = useState(priority);
@@ -32,8 +33,8 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
     };
 
 
-    const todocheck = () => {
-        setTodoDone(!tododone);
+    const todoCheck = () => {
+        setTodoDone(!todoDone);
     };
 
     const handleCloseDeleteModal = () => setShowDeleteModal(false);
@@ -42,12 +43,16 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
     const handleShowUpdateModal = () => setShowUpdateModal(true);
 
     const onCheckboxChangeHandler = () => {
-        todocheck();
-        const updatedTodos = JSON.parse(localStorage.getItem("todos")).map(todo =>
-            todo.id === id ? {...todo, completed: !tododone, tag: !tododone ? "Completed" : tag} : todo
-        );
-        localStorage.setItem("todos", JSON.stringify(updatedTodos));
-        update({_id: id, completed: !tododone, tag: !tododone ? "Completed" : tag});
+        if (!todoDone) {
+            todoCheck();
+            const storedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+            const updatedTodos = storedTodos.map(todo =>
+                todo.id === id ? {...todo, completed: true, tag: "Completed"} : todo
+            );
+
+            localStorage.setItem("todos", JSON.stringify(updatedTodos));
+            update({_id: id, completed: true, tag: "Completed"});
+        }
     };
 
     const deleteTodo = () => {
@@ -64,7 +69,7 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
             todo.id === id
                 ? {
                     ...todo,
-                    title: updatetodoTitle,
+                    title: updateTodoTitle,
                     description: updateTodoDesc,
                     tag: updateSelectedTag,
                     priority: updateSelectedPriority,
@@ -74,7 +79,7 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
         localStorage.setItem("todos", JSON.stringify(updatedTodos));
         update({
             _id: id,
-            title: updatetodoTitle,
+            title: updateTodoTitle,
             description: updateTodoDesc,
             tag: updateSelectedTag,
             priority: updateSelectedPriority,
@@ -111,7 +116,7 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
                             <Form.Control
                                 type="text"
                                 autoFocus
-                                value={updatetodoTitle}
+                                value={updateTodoTitle}
                                 onChange={(e) => setUpdateTodoTitle(e.target.value)}
                             />
                         </Form.Group>
@@ -165,8 +170,8 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
             <div className="vstack">
                 <div className="todo-nav d-flex justify-content-between align-items-center">
                     <p
-                        className={`fs-4 fw-bold text-primary overflow-hidden ${
-                            tododone ? `checkedtodo` : ``
+                        className={`fs-4 fw-bold text-primary overflow-hidden todo-title ${
+                            todoDone ? "checkedTodo" : ``
                         }`}
                     >
                         {title}
@@ -197,7 +202,7 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
                 <div className="todo-desc pt-3">
                     <p
                         className={`fw-light text-primary todo-desc-body overflow-hidden ${
-                            tododone ? `checkedtodo` : ``
+                            todoDone ? "checkedTodo" : ``
                         }`}
                     >
                         {desc}
@@ -205,18 +210,18 @@ export const Card = ({title, desc, tag, priority, id, completed, del, update}) =
                 </div>
                 <div className="todo-footer  pt-4">
                     <div className="d-flex">
-                    <div className="ms-auto mt-2 text-danger">
-                        <FlagFill  size={25}/>
-                    </div>
-                    <Form className="ms-3">
-                        <Form.Check
-                            type="checkbox"
-                            id="default-checkbox"
-                            border="1px solid black"
-                            checked={tododone}
-                            onChange={onCheckboxChangeHandler}
-                        ></Form.Check>
-                    </Form>
+                        <div className="ms-auto mt-2 text-danger">
+                            <FlagFill size={25}/>
+                        </div>
+                        <Form className="ms-3">
+                            <Form.Check
+                                type="checkbox"
+                                id="default-checkbox"
+                                border="1px solid black"
+                                checked={todoDone}
+                                onChange={onCheckboxChangeHandler}
+                            />
+                        </Form>
                     </div>
                 </div>
             </div>

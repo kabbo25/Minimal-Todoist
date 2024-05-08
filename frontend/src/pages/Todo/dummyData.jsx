@@ -47,7 +47,7 @@ const dummyTodos = [
         description: "Complete the project proposal.",
         tag: "other",
         priority: "High",
-        completed: true
+        completed: false
     },
     {
         _id: 7,
